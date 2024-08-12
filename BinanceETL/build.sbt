@@ -7,6 +7,6 @@ ThisBuild / scalaVersion := "2.13.13"
 lazy val root = (project in file("."))
   .settings(
       name := "BinanceETL",
-      libraryDependencies ++= sparkDependency,
-      javaOptions += "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED"
-  )
+      javaOptions += "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
+      libraryDependencies ++= sparkDependency
+)
