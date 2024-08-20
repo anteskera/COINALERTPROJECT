@@ -3,8 +3,11 @@ import org.apache.spark.sql.SparkSession
 
 
 object Main extends App {
-  val symbol = "BTCUSDT"
-  val interval = "1M"
+  private val symbols = Array("BTCUSDT")
+
+  //Intervals available:
+  // 1s, 1m,3m,5m,15m,30m, 1h,2h,4h,6h,8h, 12h, 1d,3d, 1w, 1M
+  private val intervals = Array("1M", "1w", "3d", "1d", "12h", "4h")
 
 
   // Initialize Spark session
@@ -13,8 +16,12 @@ object Main extends App {
     .master("local[*]") // Use local mode for testing, or remove for cluster mode
     .getOrCreate()
 
-  private val candlestickData = BinanceAPI.fetchCandlestickData(symbol, interval)
-  DBUtil.writeDFToTable(candlestickData, "btc", "monthly_candlestick_data")
+  for(symbol <- symbols){
+    for (interval <- intervals) {
+      val candlestickData = BinanceAPI.fetchAllCandleStickData(symbol, interval)
+      DBUtil.writeDFToTable(candlestickData, symbol, s"${interval}_candlestick_data")
+    }
+  }
 
   spark.close()
 }

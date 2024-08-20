@@ -22,8 +22,8 @@ object DBUtil {
   private val dbPassword: String = config.getString("db.db_password")
 
   def writeDFToTable(df: DataFrame, schema: String, table: String,
-                     saveMode: SaveMode = SaveMode.Append): Unit = {
-    val fullTableName = s"$schema.$table"
+                     saveMode: SaveMode = SaveMode.Overwrite): Unit = {
+    val fullTableName = s"\"$schema\".\"$table\""
     val jdbcURL = s"jdbc:postgresql://$dbHost/$dbName"
 
     df.write
