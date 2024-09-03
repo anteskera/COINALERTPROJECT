@@ -8,8 +8,8 @@ Python subproject used for alerting the user via email.
 
 ### ETL
 
-    Subproject used for loading the candlestick data into the database.
+Subproject used for loading the candlestick data into the database.
 
 ### TA
 
-    Subproject used to define various patterns. Will use Alerting subproject to notify the user of interesting activities.
+ Subproject used to define various patterns. Will use Alerting subproject to notify the user of interesting activities.
